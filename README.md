@@ -1,70 +1,48 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Student Portal WUSL React App
 
-## Available Scripts
+Welcome to the Student Portal React App! This application serves as the front end for the student portal system developed for Wayamba University of Sri Lanka. It provides an intuitive and user-friendly interface for students to access various features and functionalities of the student portal.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Course Registration**: Easily register for course modules at the beginning of each academic year.
+- **Exam Management**: Seamlessly manage exam registrations and view exam schedules.
+- **Grade Tracking**: Track grades and view GPA calculations for completed course modules.
+- **Course Information**: Access detailed information about each course module, including descriptions and prerequisites.
+- **Notifications**: Receive important updates and notifications regarding registration, exams, and academic events.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The Student Portal React App is built using modern web technologies, including:
 
-### `npm test`
+- **React**: JavaScript library for building user interfaces.
+- **Redux**: State management library for managing application state.
+- **React Router**: Library for handling routing within the application.
+- **Axios**: Library for making HTTP requests to the back-end API.
+- **Material-UI**: React component library that implements the Material Design system.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+To get started with the Student Portal React App, follow these steps:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository: `git clone https://github.com/your-username/student-portal-wusl.git`
+2. Install the required dependencies: `npm install`
+3. Configure the back-end API endpoint in the `.env` file.
+4. Start the development server: `npm start`
+5. Access the Student-Portal-wusl React App in your web browser at `http://localhost:3000`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Please ensure that the back-end server is running and properly configured for seamless integration with the React app.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Contributing
 
-### `npm run eject`
+Contributions are welcome! If you'd like to contribute to the development of the Student Portal React App, please follow our [contribution guidelines](CONTRIBUTING.md) and submit a pull request.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## License
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The Student Portal React App is released under the [MIT License](LICENSE).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Contact
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+If you have any questions or suggestions regarding the Student Portal React App, please feel free to [contact me](mailto:pereraroshika98@gmail.com). We appreciate your feedback and support!
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Feel free to customize and expand upon this content as per your project's specific requirements.
