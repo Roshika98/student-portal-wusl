@@ -25,7 +25,7 @@ The Student Portal React App is built using modern web technologies, including:
 
 To get started with the Student Portal React App, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/student-portal-wusl.git`
+1. Clone the repository: `git clone https://github.com/Roshika98/student-portal-wusl.git`
 2. Install the required dependencies: `npm install`
 3. Configure the back-end API endpoint in the `.env` file.
 4. Start the development server: `npm start`
