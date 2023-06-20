@@ -15,6 +15,7 @@ import {
   FormControl,
   TextField,
   Grid,
+  Typography,
 } from "@mui/material";
 
 function EmployeeLogin() {
@@ -36,65 +37,73 @@ function EmployeeLogin() {
     });
   };
 
-  <Card variant="outlined">
-    <Grid
-      container
-      direction="column"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Grid item>
-        <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-          <AccountCircle sx={{ color: "action.active", mr: 2, my: 1 }} />
-          <TextField
-            id="input-with-sx"
-            label="Username"
-            variant="standard"
-            sx={{ marginBottom: 1, marginTop: 2 }}
-            fullWidth
-            name="username"
-            //   placeholder="username"
-            value={formData.username}
-            onChange={handleFormChange}
-          />
-        </Box>
-      </Grid>
-      <Grid item>
-        <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-          <KeyIcon sx={{ color: "action.active", mr: 1, my: 1 }} />
-          <FormControl sx={{ m: 1, width: "22ch" }} variant="standard">
-            <InputLabel htmlFor="standard-adornment-password">
-              Password
-            </InputLabel>
-            <Input
-              id="standard-adornment-password"
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
+  return (
+    <Card variant="outlined">
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item>
+          <Typography variant="h4">Employee</Typography>
+        </Grid>
+        <Grid item>
+          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+            <AccountCircle sx={{ color: "action.active", mr: 2, my: 1 }} />
+            <TextField
+              id="input-with-sx"
+              label="Username"
+              variant="standard"
+              sx={{ marginBottom: 1, marginTop: 2 }}
+              fullWidth
+              name="username"
+              //   placeholder="username"
+              value={formData.username}
+              onChange={handleFormChange}
             />
-          </FormControl>
-        </Box>
+          </Box>
+        </Grid>
+        <Grid item>
+          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+            <KeyIcon sx={{ color: "action.active", mr: 1, my: 1 }} />
+            <FormControl sx={{ width: "22ch" }} variant="standard">
+              <InputLabel htmlFor="standard-adornment-password">
+                Password
+              </InputLabel>
+              <Input
+                id="standard-adornment-password"
+                name="password"
+                value={formData.password}
+                onChange={handleFormChange}
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </Box>
+        </Grid>
+        <Grid item>
+          <Button
+            variant="contained"
+            endIcon={<LoginIcon />}
+            sx={{ marginBottom: 2, marginTop: 2 }}
+          >
+            Login
+          </Button>
+        </Grid>
       </Grid>
-      <Grid item>
-        <Button
-          variant="contained"
-          endIcon={<LoginIcon />}
-          sx={{ marginBottom: 2, marginTop: 2 }}
-        >
-          Login
-        </Button>
-      </Grid>
-    </Grid>
-  </Card>;
+    </Card>
+  );
 }
 
 export default EmployeeLogin;

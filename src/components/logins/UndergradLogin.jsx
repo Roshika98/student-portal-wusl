@@ -3,7 +3,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LoginIcon from "@mui/icons-material/Login";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import KeyIcon from "@mui/icons-material/Key";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import AuthContext from "../../context/AuthProvider";
 import {
   Card,
   Box,
@@ -15,9 +16,14 @@ import {
   FormControl,
   TextField,
   Grid,
+  Typography,
 } from "@mui/material";
+import axios from "../../api/axios";
+
+const UG_LOGIN_URL = "/student-portal/auth/undergraduate";
 
 function UndergradLogin() {
+  const { setAuth } = useContext(AuthContext);
   const [formData, handleChange] = useState({ username: "", password: "" });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -36,6 +42,23 @@ function UndergradLogin() {
     });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        UG_LOGIN_URL,
+        JSON.stringify(formData),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
+
   return (
     <Card variant="outlined">
       <Grid
@@ -44,6 +67,9 @@ function UndergradLogin() {
         justifyContent="center"
         alignItems="center"
       >
+        <Grid item>
+          <Typography variant="h4">Undergraduate</Typography>
+        </Grid>
         <Grid item>
           <Box sx={{ display: "flex", alignItems: "flex-end" }}>
             <AccountCircle sx={{ color: "action.active", mr: 2, my: 1 }} />
@@ -63,12 +89,15 @@ function UndergradLogin() {
         <Grid item>
           <Box sx={{ display: "flex", alignItems: "flex-end" }}>
             <KeyIcon sx={{ color: "action.active", mr: 1, my: 1 }} />
-            <FormControl sx={{ m: 1, width: "22ch" }} variant="standard">
+            <FormControl sx={{ width: "22ch" }} variant="standard">
               <InputLabel htmlFor="standard-adornment-password">
                 Password
               </InputLabel>
               <Input
                 id="standard-adornment-password"
+                name="password"
+                value={formData.password}
+                onChange={handleFormChange}
                 type={showPassword ? "text" : "password"}
                 endAdornment={
                   <InputAdornment position="end">
@@ -87,6 +116,7 @@ function UndergradLogin() {
         </Grid>
         <Grid item>
           <Button
+            onClick={handleSubmit}
             variant="contained"
             endIcon={<LoginIcon />}
             sx={{ marginBottom: 2, marginTop: 2 }}
