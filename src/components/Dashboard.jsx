@@ -14,10 +14,13 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import UndergradSide from "./side-panels/UndergradSide";
+import LecturerSide from "./side-panels/LecturerSide";
+import EmployeeSide from "./side-panels/EmployeeSide";
+import WebmasterSide from "./side-panels/WebmasterSide";
 import ROLE from "../config/Roles.config";
 import { useState } from "react";
 
-function Navbar({ role = ROLE.NONE }) {
+function Dashboard({ role = ROLE.NONE }) {
   const w = window;
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -197,8 +200,25 @@ function Navbar({ role = ROLE.NONE }) {
             mobileOpen={mobileOpen}
             handleDrawerToggle={handleDrawerToggle}
           />
-        ) : role === ROLE.LECTURER ? null : role ===
-          ROLE.EMPLOYEE ? null : role === ROLE.WEBMASTER ? null : null}
+        ) : role === ROLE.LECTURER ? (
+          <LecturerSide
+            w={w}
+            mobileOpen={mobileOpen}
+            handleDrawerToggle={handleDrawerToggle}
+          />
+        ) : role === ROLE.EMPLOYEE ? (
+          <EmployeeSide
+            w={w}
+            mobileOpen={mobileOpen}
+            handleDrawerToggle={handleDrawerToggle}
+          />
+        ) : role === ROLE.WEBMASTER ? (
+          <WebmasterSide
+            w={w}
+            mobileOpen={mobileOpen}
+            handleDrawerToggle={handleDrawerToggle}
+          />
+        ) : null}
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <Toolbar />
         </Box>
@@ -207,4 +227,4 @@ function Navbar({ role = ROLE.NONE }) {
   );
 }
 
-export default Navbar;
+export default Dashboard;

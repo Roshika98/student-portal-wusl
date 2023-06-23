@@ -27,6 +27,7 @@ function UndergradLogin() {
   const [formData, handleChange] = useState({ username: "", password: "" });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [errMsg, setErrMsg] = useState(null);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -53,9 +54,20 @@ function UndergradLogin() {
           withCredentials: true,
         }
       );
-      console.log(response.data);
+      // console.log(response.data);
+      var { _id, type } = response.data;
+      setAuth({ id: _id, role: type });
     } catch (error) {
       console.log(error.response.data.message);
+      if (!error?.response) {
+        setErrMsg("No server response");
+      } else if (error.response.status === 400) {
+        setErrMsg("Missing username or password");
+      } else if (error.response.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Login failed");
+      }
     }
   };
 

@@ -1,9 +1,9 @@
 const ROLE = {
-  UNDERGRAD: 0,
-  LECTURER: 1,
-  EMPLOYEE: 2,
-  WEBMASTER: 3,
-  NONE: 4,
+  UNDERGRAD: "undergraduate",
+  LECTURER: "lecturer",
+  EMPLOYEE: "employee",
+  WEBMASTER: "webmaster",
+  NONE: "none",
 };
 
 export default ROLE;
