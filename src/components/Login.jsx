@@ -12,13 +12,11 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Fragment, useState, useContext } from "react";
+import { Fragment, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import AuthContext from "../context/AuthProvider";
 
-function Login() {
-  const { auth } = useContext(AuthContext);
-  const [user, setUser] = useState("Undergrad");
+function Login({ userType = "Undergrad" }) {
+  const [user, setUser] = useState(userType);
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 

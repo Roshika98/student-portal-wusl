@@ -3,8 +3,9 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LoginIcon from "@mui/icons-material/Login";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import KeyIcon from "@mui/icons-material/Key";
-import { useState, useContext } from "react";
-import AuthContext from "../../context/AuthProvider";
+import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import {
   Card,
   Box,
@@ -18,12 +19,14 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import axios from "../../api/axios";
-
-const UG_LOGIN_URL = "/student-portal/auth/undergraduate";
+import axios, { URLs } from "../../api/axios";
 
 function UndergradLogin() {
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/undergraduate";
+
   const [formData, handleChange] = useState({ username: "", password: "" });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -47,16 +50,19 @@ function UndergradLogin() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        UG_LOGIN_URL,
+        URLs.UG_LOGIN,
         JSON.stringify(formData),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       );
-      // console.log(response.data);
+
       var { _id, type } = response.data;
       setAuth({ id: _id, role: type });
+      var newVal = localStorage.getItem("auth");
+      console.log(JSON.parse(newVal));
+      navigate(from, { replace: true });
     } catch (error) {
       console.log(error.response.data.message);
       if (!error?.response) {

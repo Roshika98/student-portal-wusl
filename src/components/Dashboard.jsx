@@ -19,9 +19,12 @@ import EmployeeSide from "./side-panels/EmployeeSide";
 import WebmasterSide from "./side-panels/WebmasterSide";
 import ROLE from "../config/Roles.config";
 import { useState } from "react";
+import axios, { URLs } from "../api/axios";
+import useAuth from "../hooks/useAuth";
 
 function Dashboard({ role = ROLE.NONE }) {
   const w = window;
+  const { setAuth } = useAuth();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -50,6 +53,21 @@ function Dashboard({ role = ROLE.NONE }) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(URLs.LOGOUT, JSON.stringify({}), {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
+      if (response.status === 200) {
+        setAuth({ id: null, role: null });
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -67,8 +85,8 @@ function Dashboard({ role = ROLE.NONE }) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
