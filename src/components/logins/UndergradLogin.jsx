@@ -5,7 +5,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import KeyIcon from "@mui/icons-material/Key";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Card,
   Box,
@@ -30,7 +30,7 @@ function UndergradLogin() {
   const [formData, handleChange] = useState({ username: "", password: "" });
 
   const [showPassword, setShowPassword] = useState(false);
-  const [errMsg, setErrMsg] = useState(null);
+  // const [errMsg, setErrMsg] = useState(null);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -51,11 +51,7 @@ function UndergradLogin() {
     try {
       const response = await axios.post(
         URLs.UG_LOGIN,
-        JSON.stringify(formData),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
+        JSON.stringify(formData)
       );
 
       var { _id, type } = response.data;
@@ -65,15 +61,15 @@ function UndergradLogin() {
       navigate(from, { replace: true });
     } catch (error) {
       console.log(error.response.data.message);
-      if (!error?.response) {
-        setErrMsg("No server response");
-      } else if (error.response.status === 400) {
-        setErrMsg("Missing username or password");
-      } else if (error.response.status === 401) {
-        setErrMsg("Unauthorized");
-      } else {
-        setErrMsg("Login failed");
-      }
+      // if (!error?.response) {
+      //   setErrMsg("No server response");
+      // } else if (error.response.status === 400) {
+      //   setErrMsg("Missing username or password");
+      // } else if (error.response.status === 401) {
+      //   setErrMsg("Unauthorized");
+      // } else {
+      //   setErrMsg("Login failed");
+      // }
     }
   };
 

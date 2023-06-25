@@ -1,7 +1,12 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: process.env.BASE_URL || "http://localhost:8080",
+  baseURL: process.env.REACT_APP_BASE_URL || "https://localhost:8080",
+  headers: {
+    "Cache-Control": "public, max-age=3600, s-maxage=3600",
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
 });
 
 export const URLs = {

@@ -55,10 +55,7 @@ function Dashboard({ role = ROLE.NONE }) {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post(URLs.LOGOUT, JSON.stringify({}), {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
+      const response = await axios.post(URLs.LOGOUT, JSON.stringify({}));
       if (response.status === 200) {
         setAuth({ id: null, role: null });
         window.location.reload();
