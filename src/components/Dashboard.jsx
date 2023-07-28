@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-
 import AppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
@@ -19,227 +18,262 @@ import EmployeeSide from "./side-panels/EmployeeSide";
 import WebmasterSide from "./side-panels/WebmasterSide";
 import ROLE from "../config/Roles.config";
 import { useState } from "react";
-import axios, { URLs } from "../api/axios";
-import useAuth from "../hooks/useAuth";
+import DashboardSegment from "./segments/undergrad/DashboardSegment";
+import CoursesSegment from "./segments/undergrad/CoursesSegment";
+import ProgressSegment from "./segments/undergrad/ProgressSegment";
+import ClubsSegment from "./segments/undergrad/ClubsSegment";
+import ActivitySegment from "./segments/undergrad/ActivitySegment";
+import ProfileSegment from "./segments/undergrad/ProfileSegment";
+import TimeTableSegment from "./segments/undergrad/TimeTableSegment";
+import NotificationSegment from "./segments/undergrad/NotificationSegment";
+// import axios, { URLs } from "../api/axios";
+// import useAuth from "../hooks/useAuth";
 
-function Dashboard({ role = ROLE.NONE }) {
-  const w = window;
-  const { setAuth } = useAuth();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
+function Dashboard({ role = ROLE.NONE, indicator = 0 }) {
+	const w = window;
+	// const { setAuth } = useAuth();
+	const [anchorEl, setAnchorEl] = useState(null);
+	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+	const [mobileOpen, setMobileOpen] = useState(false);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+	const handleDrawerToggle = () => {
+		setMobileOpen(!mobileOpen);
+	};
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+	const isMenuOpen = Boolean(anchorEl);
+	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+	const handleProfileMenuOpen = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
+	const handleMobileMenuClose = () => {
+		setMobileMoreAnchorEl(null);
+	};
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
+	const handleMenuClose = () => {
+		setAnchorEl(null);
+		handleMobileMenuClose();
+	};
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+	const handleMobileMenuOpen = (event) => {
+		setMobileMoreAnchorEl(event.currentTarget);
+	};
 
-  const handleLogout = async () => {
-    try {
-      const response = await axios.post(URLs.LOGOUT, JSON.stringify({}));
-      if (response.status === 200) {
-        setAuth({ id: null, role: null });
-        window.location.reload();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+	// const handleLogout = async () => {
+	//   try {
+	//     const response = await axios.post(URLs.LOGOUT, JSON.stringify({}));
+	//     if (response.status === 200) {
+	//       setAuth({ id: null, role: null });
+	//       window.location.reload();
+	//     }
+	//   } catch (error) {
+	//     console.log(error);
+	//   }
+	// };
 
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleLogout}>Logout</MenuItem>
-    </Menu>
-  );
+	const menuId = "primary-search-account-menu";
+	const renderMenu = (
+		<Menu
+			anchorEl={anchorEl}
+			anchorOrigin={{
+				vertical: "top",
+				horizontal: "right",
+			}}
+			id={menuId}
+			keepMounted
+			transformOrigin={{
+				vertical: "top",
+				horizontal: "right",
+			}}
+			open={isMenuOpen}
+			onClose={handleMenuClose}
+		>
+			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
+			{/* <MenuItem onClick={handleLogout}>Logout</MenuItem> */}
+		</Menu>
+	);
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
+	const mobileMenuId = "primary-search-account-menu-mobile";
+	const renderMobileMenu = (
+		<Menu
+			anchorEl={mobileMoreAnchorEl}
+			anchorOrigin={{
+				vertical: "top",
+				horizontal: "right",
+			}}
+			id={mobileMenuId}
+			keepMounted
+			transformOrigin={{
+				vertical: "top",
+				horizontal: "right",
+			}}
+			open={isMobileMenuOpen}
+			onClose={handleMobileMenuClose}
+		>
+			<MenuItem>
+				<IconButton size="large" aria-label="show 4 new mails" color="inherit">
+					<Badge badgeContent={4} color="error">
+						<MailIcon />
+					</Badge>
+				</IconButton>
+				<p>Messages</p>
+			</MenuItem>
+			<MenuItem>
+				<IconButton
+					size="large"
+					aria-label="show 17 new notifications"
+					color="inherit"
+				>
+					<Badge badgeContent={17} color="error">
+						<NotificationsIcon />
+					</Badge>
+				</IconButton>
+				<p>Notifications</p>
+			</MenuItem>
+			<MenuItem onClick={handleProfileMenuOpen}>
+				<IconButton
+					size="large"
+					aria-label="account of current user"
+					aria-controls="primary-search-account-menu"
+					aria-haspopup="true"
+					color="inherit"
+				>
+					<AccountCircle />
+				</IconButton>
+				<p>Profile</p>
+			</MenuItem>
+		</Menu>
+	);
 
-  return (
-    <div className="App">
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        <AppBar
-          position="fixed"
-          sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          color="warning"
-        >
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              Student Portal
-            </Typography>
-            <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <IconButton
-                size="large"
-                aria-label="show 4 new mails"
-                color="inherit"
-              >
-                <Badge badgeContent={4} color="error">
-                  <MailIcon />
-                </Badge>
-              </IconButton>
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge badgeContent={17} color="error">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            </Box>
-            <Box sx={{ display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
-                <MoreIcon />
-              </IconButton>
-            </Box>
-          </Toolbar>
-        </AppBar>
-        {renderMobileMenu}
-        {renderMenu}
-        {role === ROLE.UNDERGRAD ? (
-          <UndergradSide
-            w={w}
-            mobileOpen={mobileOpen}
-            handleDrawerToggle={handleDrawerToggle}
-          />
-        ) : role === ROLE.LECTURER ? (
-          <LecturerSide
-            w={w}
-            mobileOpen={mobileOpen}
-            handleDrawerToggle={handleDrawerToggle}
-          />
-        ) : role === ROLE.EMPLOYEE ? (
-          <EmployeeSide
-            w={w}
-            mobileOpen={mobileOpen}
-            handleDrawerToggle={handleDrawerToggle}
-          />
-        ) : role === ROLE.WEBMASTER ? (
-          <WebmasterSide
-            w={w}
-            mobileOpen={mobileOpen}
-            handleDrawerToggle={handleDrawerToggle}
-          />
-        ) : null}
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <Toolbar />
-        </Box>
-      </Box>
-    </div>
-  );
+	return (
+		<div className="App">
+			<Box sx={{ display: "flex" }}>
+				<CssBaseline />
+				<AppBar
+					position="fixed"
+					sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+					color="warning"
+				>
+					<Toolbar>
+						<IconButton
+							color="inherit"
+							aria-label="open drawer"
+							edge="start"
+							onClick={handleDrawerToggle}
+							sx={{ mr: 2, display: { sm: "none" } }}
+						>
+							<MenuIcon />
+						</IconButton>
+						<Typography variant="h6" noWrap component="div">
+							Student Portal
+						</Typography>
+						<Box sx={{ flexGrow: 1 }} />
+						<Box sx={{ display: { xs: "none", md: "flex" } }}>
+							<IconButton
+								size="large"
+								aria-label="show 4 new mails"
+								color="inherit"
+							>
+								<Badge badgeContent={4} color="error">
+									<MailIcon />
+								</Badge>
+							</IconButton>
+							<IconButton
+								size="large"
+								aria-label="show 17 new notifications"
+								color="inherit"
+							>
+								<Badge badgeContent={17} color="error">
+									<NotificationsIcon />
+								</Badge>
+							</IconButton>
+							<IconButton
+								size="large"
+								edge="end"
+								aria-label="account of current user"
+								aria-controls={menuId}
+								aria-haspopup="true"
+								onClick={handleProfileMenuOpen}
+								color="inherit"
+							>
+								<AccountCircle />
+							</IconButton>
+						</Box>
+						<Box sx={{ display: { xs: "flex", md: "none" } }}>
+							<IconButton
+								size="large"
+								aria-label="show more"
+								aria-controls={mobileMenuId}
+								aria-haspopup="true"
+								onClick={handleMobileMenuOpen}
+								color="inherit"
+							>
+								<MoreIcon />
+							</IconButton>
+						</Box>
+					</Toolbar>
+				</AppBar>
+				{renderMobileMenu}
+				{renderMenu}
+				{role === ROLE.UNDERGRAD ? (
+					<UndergradSide
+						w={w}
+						mobileOpen={mobileOpen}
+						handleDrawerToggle={handleDrawerToggle}
+						selectedId={indicator}
+					/>
+				) : role === ROLE.LECTURER ? (
+					<LecturerSide
+						w={w}
+						mobileOpen={mobileOpen}
+						handleDrawerToggle={handleDrawerToggle}
+					/>
+				) : role === ROLE.EMPLOYEE ? (
+					<EmployeeSide
+						w={w}
+						mobileOpen={mobileOpen}
+						handleDrawerToggle={handleDrawerToggle}
+					/>
+				) : role === ROLE.WEBMASTER ? (
+					<WebmasterSide
+						w={w}
+						mobileOpen={mobileOpen}
+						handleDrawerToggle={handleDrawerToggle}
+					/>
+				) : null}
+				<Box
+					component="main"
+					sx={{
+						flexGrow: 1,
+						paddingLeft: "17%",
+						paddingTop: 5,
+						paddingRight: 5,
+						paddingBottom: 5,
+					}}
+				>
+					<Toolbar />
+					{indicator === 0 ? (
+						<DashboardSegment />
+					) : indicator === 1 ? (
+						<CoursesSegment />
+					) : indicator === 2 ? (
+						<ProgressSegment />
+					) : indicator === 3 ? (
+						<ClubsSegment />
+					) : indicator === 4 ? (
+						<TimeTableSegment />
+					) : indicator === 5 ? (
+						<ActivitySegment />
+					) : indicator === 6 ? (
+						<NotificationSegment />
+					) : (
+						<ProfileSegment />
+					)}
+				</Box>
+			</Box>
+		</div>
+	);
 }
 
 export default Dashboard;
