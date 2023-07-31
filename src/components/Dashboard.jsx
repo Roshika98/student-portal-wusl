@@ -245,7 +245,7 @@ function Dashboard({ role = ROLE.NONE, indicator = 0 }) {
 				<Box
 					component="main"
 					sx={{
-						flexGrow: 1,
+						flexGrow: 0,
 						paddingLeft: "17%",
 						paddingTop: 5,
 						paddingRight: 5,
